@@ -6,7 +6,6 @@ import cmc.du11.xuangia_ththuan.repository.PermissionRepo;
 import cmc.du11.xuangia_ththuan.repository.UserRepo;
 import cmc.du11.xuangia_ththuan.service.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +25,7 @@ public class UserServiceImpl implements UserService, CommandLineRunner {
     public List<User> getUserByPermission(Permission permission) {
         return userRepo.findAll()
                 .stream()
-                .filter(u -> u.getPermissions().contains(permission))
+                .filter(u -> u.getPermissionList().contains(permission))
                 .collect(Collectors.toList());
     }
 
@@ -55,10 +54,15 @@ public class UserServiceImpl implements UserService, CommandLineRunner {
                 new User("Lionel Messi"),
                 new User("Kento Momota")
         );
-        userList.get(0).setPermissions(permissionRepo.findAll().subList(1,3));
-        userList.get(1).setPermissions(permissionRepo.findAll().subList(1,1));
-        userList.get(2).setPermissions(permissionRepo.findAll().subList(0,2));
-        userList.get(3).setPermissions(permissionRepo.findAll().subList(1,2));
+/*        userList.get(0).setPermissionList(permissionRepo.findAll().subList(1,3));
+        userList.get(1).setPermissionList(permissionRepo.findAll().subList(1,1));
+        userList.get(2).setPermissionList(permissionRepo.findAll().subList(0,2));
+        userList.get(3).setPermissionList(permissionRepo.findAll().subList(1,2));*/
+
+        userList.get(0).setPermissionList(permissionList.subList(1,3));
+        userList.get(1).setPermissionList(permissionList.subList(2,3));
+        userList.get(2).setPermissionList(permissionList.subList(0,2));
+        userList.get(3).setPermissionList(permissionList.subList(1,2));
 
         userRepo.saveAll(userList);
     }
