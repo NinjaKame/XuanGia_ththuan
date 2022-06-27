@@ -6,7 +6,7 @@ import cmc.du11.xuangia_ththuan.entity.User;
 import java.util.List;
 
 public interface UserService {
-    List<User> getUserByPermission(Permission permission);
+    List<User> getUserByPermission(String permission);
 
     boolean insertUser(User user);
 }

@@ -22,10 +22,11 @@ public class UserServiceImpl implements UserService, CommandLineRunner {
     private final PermissionRepo permissionRepo;
 
     @Override
-    public List<User> getUserByPermission(Permission permission) {
+    public List<User> getUserByPermission(String permissionId) {
+        Permission result = permissionRepo.findById(Long.valueOf(permissionId)).orElseThrow(()-> new NullPointerException("PermissionId NOT found"));
         return userRepo.findAll()
                 .stream()
-                .filter(u -> u.getPermissionList().contains(permission))
+                .filter(u -> u.getPermissionList().contains(result))
                 .collect(Collectors.toList());
     }
 
