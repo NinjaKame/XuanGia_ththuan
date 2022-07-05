@@ -8,5 +8,7 @@ import java.util.List;
 public interface UserService {
     List<User> getUserByPermission(String permission);
 
+    List<User> getAllUsers(int startPage, int pageSize, String sort);
+
     boolean insertUser(User user);
 }
